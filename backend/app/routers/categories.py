@@ -37,6 +37,18 @@ def list_categories(
     return CategoryService.list_categories(db, skip=skip, limit=limit)
 
 
+@router.get("/me", response_model=List[CategoryResponse])
+def list_my_categories(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Retorna exclusivamente los tableros donde el usuario autenticado
+    es dueño o colaborador activo.
+    """
+    return CategoryService.list_user_categories(db, current_user.id)
+
+
 @router.get("/{category_id}", response_model=CategoryDetailResponse)
 def get_category_detail(
     category_id: uuid.UUID,

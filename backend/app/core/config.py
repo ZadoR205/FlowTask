@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api/v1"
     DATABASE_URL: str = "postgresql+psycopg://postgres:postgres@localhost:5432/flowtask_db"
-    CORS_ORIGINS: str = "http://localhost:3000,http://localhost:5173,http://localhost:4200"
+    CORS_ORIGINS: str = "http://localhost:3000,http://localhost:5173,http://localhost:4200,http://localhost:8000"
 
     model_config = SettingsConfigDict(
         env_file=".env",
