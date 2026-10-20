@@ -120,6 +120,17 @@ Puedes poblar o resetear por completo los datos de prueba de dos formas:
    python seed.py
    ```
 
+### Paso 8: Puesta en marcha de la aplicación Frontend (React + Vite)
+En una nueva terminal:
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+La aplicación web estará disponible en [http://localhost:5173](http://localhost:5173).  
+Permite iniciar sesión por correo o utilizar el botón **"Acceder con Cuentas Demo"** para probar instantáneamente los roles de **Admin**, **Carlos Dev** o **Ana Design**.
+
 ---
 
 ## 🧪 Ejecución de Pruebas Automatizadas
@@ -176,10 +187,11 @@ Para facilitar la interacción tanto en Swagger como en el Frontend o tests, los
 Todos los endpoints están disponibles tanto en la raíz (ej. `/tasks`) como con el prefijo de versión `/api/v1` (ej. `/api/v1/tasks`).
 
 ### Categorías (Tableros)
-* `GET /categories` - Lista todas las categorías (Caso 1).
-* `POST /categories` - Crea un nuevo tablero (Header `X-User-Email` requerido). Genera el estado `BACKLOG` y asigna al creador como dueño.
-* `GET /categories/{id}` - Obtiene el detalle del tablero, incluyendo sus estados ordenados y sus colaboradores.
-* `DELETE /categories/{id}` - Elimina el tablero (Solo dueño).
+* `GET /api/v1/categories` - Lista todas las categorías (Caso 1 de listado general).
+* `GET /api/v1/categories/me` - Lista **únicamente los tableros accesibles** para el usuario autenticado (`X-User-Id`), ya sea como dueño o colaborador.
+* `POST /api/v1/categories` - Crea un nuevo tablero (Header `X-User-Id` requerido). Genera el estado `BACKLOG` y asigna al creador como dueño.
+* `GET /api/v1/categories/{id}` - Obtiene el detalle del tablero, incluyendo sus estados ordenados y sus colaboradores.
+* `DELETE /api/v1/categories/{id}` - Elimina el tablero (Solo dueño).
 
 ### Estados (States)
 * `POST /categories/{id}/states` - Crea un nuevo estado con order correlativo automático (Solo dueño).
@@ -197,7 +209,8 @@ Todos los endpoints están disponibles tanto en la raíz (ej. `/tasks`) como con
 * `PATCH /tasks/{id}` - Modifica campos o cambia de estado rápidamente (Caso 4). Valida permisos según sea dueño o responsable asignado.
 * `DELETE /tasks/{id}` - Elimina una tarea (Caso 4, Solo dueño).
 
-### Usuarios
-* `POST /users` - Registra un nuevo usuario (`name`, `email`).
-* `GET /users` - Lista todos los usuarios.
-* `GET /users/{id}` - Obtiene los datos de un usuario por su ID.
+### Autenticación y Usuarios
+* `POST /api/v1/auth/register` - Registro público de nuevas cuentas de usuario (`name`, `email`).
+* `POST /api/v1/auth/login` - Inicio de sesión por correo electrónico para obtener el identificador de usuario (`X-User-Id`).
+* `GET /api/v1/users` - Lista todos los usuarios registrados.
+* `GET /api/v1/users/{id}` - Obtiene los datos de un usuario por su ID.
