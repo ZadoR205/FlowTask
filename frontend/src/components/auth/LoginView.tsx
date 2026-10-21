@@ -28,10 +28,17 @@ export const LoginView: React.FC = () => {
     try {
       setIsResetting(true);
       const res = await api.seed.reset();
-      showSuccess('Base de datos inicializada', `${res.users} usuarios, ${res.categories} tableros y ${res.tasks} tareas creadas.`);
+      localStorage.removeItem('flowtask_user_id');
+      localStorage.removeItem('flowtask_user_data');
+      showSuccess(
+        'Base de datos inicializada',
+        `${res.users} usuarios, ${res.categories} tableros y ${res.tasks} tareas creadas. Recargando...`
+      );
+      setTimeout(() => {
+        window.location.reload();
+      }, 600);
     } catch {
       showError('Error al resetear', 'No se pudo conectar con el endpoint /seed.');
-    } finally {
       setIsResetting(false);
     }
   };

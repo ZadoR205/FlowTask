@@ -163,10 +163,10 @@ pytest -v
 
 Cobertura de pruebas incluidas:
 
-1. `test_categories.py`: Caso 1 (`GET /categories`), creación de tableros, asignación de dueño y autogeneración de estado `BACKLOG` con `order = 0`.
+1. `test_categories.py`: (`GET /categories`), creación de tableros, asignación de dueño y autogeneración de estado `BACKLOG` con `order = 0`.
 2. `test_states.py`: Cálculo automático del orden secuencial ($0, 1, 2\dots$), protección absoluta contra borrado de `BACKLOG`, rechazo de borrado de estados con tareas asociadas (HTTP 409) y reordenamiento automático de estados posteriores.
 3. `test_collaborators.py`: Permiso exclusivo del dueño para agregar colaboradores por correo, rechazo a no dueños (HTTP 403), validación de emails inexistentes (HTTP 404) y duplicados (HTTP 409).
-4. `test_tasks.py`: Casos 2, 3, 4 y 5. Creación con estado por defecto, validación de responsable colaborador, permisos de cambio de estado (dueño vs colaborador asignado vs colaborador no asignado), borrado seguro y 404 para tareas inexistentes.
+4. `test_tasks.py`: Creación con estado por defecto, validación de responsable colaborador, permisos de cambio de estado (dueño vs colaborador asignado vs colaborador no asignado), borrado seguro y 404 para tareas inexistentes.
 5. `test_seed.py`: Verificación del reseteo DDL total y siembra de datos mediante `POST /seed` y `POST /api/v1/seed`.
 
 ---

@@ -36,11 +36,17 @@ export const Navbar: React.FC<NavbarProps> = ({
     try {
       setIsResetting(true);
       const res = await api.seed.reset();
-      showSuccess('Base de datos reseteada', `${res.categories} tableros y ${res.tasks} tareas cargadas.`);
-      onRefreshData();
+      localStorage.removeItem('flowtask_user_id');
+      localStorage.removeItem('flowtask_user_data');
+      showSuccess(
+        'Base de datos reseteada',
+        `${res.categories} tableros y ${res.tasks} tareas cargadas. Recargando...`
+      );
+      setTimeout(() => {
+        window.location.reload();
+      }, 600);
     } catch {
       showError('Error en Seed', 'No se pudo resetear la base de datos.');
-    } finally {
       setIsResetting(false);
     }
   };
