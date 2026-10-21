@@ -282,7 +282,6 @@ export const App: React.FC = () => {
       <Navbar
         viewMode={viewMode}
         onViewModeChange={setViewMode}
-        onRefreshData={() => activeCategory && selectCategory(activeCategory.id)}
       />
 
       {/* 2. Barra de Tablero Activo */}

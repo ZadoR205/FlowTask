@@ -9,13 +9,11 @@ export type ViewMode = 'kanban' | 'list';
 interface NavbarProps {
   viewMode: ViewMode;
   onViewModeChange: (mode: ViewMode) => void;
-  onRefreshData: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   viewMode,
   onViewModeChange,
-  onRefreshData,
 }) => {
   const { currentUser, logout } = useAuth();
   const { showSuccess, showError } = useToast();
